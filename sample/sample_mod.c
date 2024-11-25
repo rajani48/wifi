@@ -1,13 +1,15 @@
-#include <sys/types.h>
-#include <sys/param.h>
+/*#include <sys/types.h>
+#include <sys/param.h> 
 #include <sys/kernel.h>
 #include <sys/module.h>
 #include <sys/sysctl.h>
 #include <sys/systm.h>
 #include <sys/malloc.h>
-#include <sys/callout.h>
+#include <sys/callout.h> */
 
-#include "chdev_drv.h"
+//#include "chdev_drv.h"
+
+#include "sample_dep.h"
 
 static struct callout my_callout;
 
@@ -31,7 +33,7 @@ static void sample_fun(void)
 }
 #endif
 
-typedef void (*callout_cb)(void *);
+/*typedef void (*callout_cb)(void *);
 
 static void
 callout_reset_dbg(struct callout *my_callout, int hz, callout_cb cb, void *arg)
@@ -41,14 +43,7 @@ callout_reset_dbg(struct callout *my_callout, int hz, callout_cb cb, void *arg)
 		    , __func__, (void*)my_callout, hz, (void*)cb, (void*) arg);
     wifi_dbg(buf, __func__);
     callout_reset(my_callout, hz, cb, arg);
-}
-
-#ifdef callout_reset
-#undef callout_reset
-#endif
-
-#define callout_reset(my_callout, hz, cb, arg) \
-	callout_reset_dbg(my_callout, hz, cb, arg)
+}*/
 
 static void my_timer_cb(void *arg)
 {
