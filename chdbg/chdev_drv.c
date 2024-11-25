@@ -11,7 +11,7 @@
 
 #define DEVICE_NAME "chdbg"
 //#define DEBUG_LOG_ENABLED 1
-#define MAX_LINES 100000
+#define MAX_LINES 100
 #define MAX_LINE_LEN 128
 
 //static int debug_enabled = DEBUG_LOG_ENABLED;
