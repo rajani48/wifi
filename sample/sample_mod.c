@@ -38,6 +38,7 @@ static void sample_fun(void)
 	callout_reset(my_callout, hz, cb, arg);		\
 } while (0)
 
+#define callout_reset callout_reset_dbg
 
 static void my_timer_cb(void *arg)
 {
@@ -52,7 +53,7 @@ static int sample_module_init(void)
 //    wifi_dbg("sample_mod", __func__);
 //    sample_fun();
     callout_init(&my_callout, 1);
-    callout_reset_dbg(&my_callout, 5000, my_timer_cb, NULL);
+    callout_reset(&my_callout, 5000, my_timer_cb, NULL);
 
     return 0;
 }
