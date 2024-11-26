@@ -1,64 +1,18 @@
-/*#include <sys/types.h>
-#include <sys/param.h> 
-#include <sys/kernel.h>
-#include <sys/module.h>
-#include <sys/sysctl.h>
-#include <sys/systm.h>
-#include <sys/malloc.h>
-#include <sys/callout.h> */
-
-//#include "chdev_drv.h"
-
 #include "sample_dep.h"
 
 static struct callout my_callout;
 
-#if 0
-static void sample_fun(void)
-{
-    wifi_dbg("sample_mod1", __func__);
-    wifi_dbg("sample_mod2", __func__);
-    wifi_dbg("sample_mod3", __func__);
-    wifi_dbg("sample_mod4", __func__);
-    wifi_dbg("sample_mod5", __func__);
-    wifi_dbg("sample_mod6", __func__);
-    wifi_dbg("sample_mod7", __func__);
-    wifi_dbg("sample_mod8", __func__);
-    wifi_dbg("sample_mod9", __func__);
-    wifi_dbg("sample_mod10", __func__);
-    wifi_dbg("sample_mod11", __func__);
-    wifi_dbg("sample_mod12", __func__);
-    wifi_dbg("sample_mod13", __func__);
-    wifi_dbg("sample_mod14", __func__);
-}
-#endif
-
-/*typedef void (*callout_cb)(void *);
-
-static void
-callout_reset_dbg(struct callout *my_callout, int hz, callout_cb cb, void *arg)
-{
-    char buf[128];
-    snprintf(buf, 128, "%s is activating timer callout=%p, ticks=%d cb=%p arg=%p"
-		    , __func__, (void*)my_callout, hz, (void*)cb, (void*) arg);
-    wifi_dbg(buf, __func__);
-    callout_reset(my_callout, hz, cb, arg);
-}*/
-
 static void my_timer_cb(void *arg)
 {
-    printf("callout executed\n");// counter:%d\n", ++counter);
+    printf("callout executed\n");
     wifi_dbg("executing timer", __func__);
 }
 
 static int sample_module_init(void)
 {
     printf("Sample module loaded\n");
-
-//    wifi_dbg("sample_mod", __func__);
-//    sample_fun();
     callout_init(&my_callout, 1);
-    callout_reset(&my_callout, 5000, my_timer_cb, NULL);
+    callout_reset_dbg(&my_callout, 5000, my_timer_cb, NULL);
 
     return 0;
 }
@@ -70,9 +24,7 @@ static int sample_module_exit(void)
     return 0;
 }
 
-
-static int
-sample_module_handler(struct module *m, int event, void *arg)
+static int sample_module_handler(struct module *m, int event, void *arg)
 {
     switch(event)
     {
@@ -85,7 +37,6 @@ sample_module_handler(struct module *m, int event, void *arg)
     }
 }
 
-/* Declare the module */
 static moduledata_t sample_mod = {
     "sample_module",
     sample_module_handler,
