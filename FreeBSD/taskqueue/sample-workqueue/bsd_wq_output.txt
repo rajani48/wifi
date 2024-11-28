@@ -1,0 +1,78 @@
+# dmesg -c
+Module loaded
+Executing deferred work function
+# 
+# 
+# procstat -at | grep wq
+    0 100038 kernel              linuxkpi_irq_wq      -1   76 sleep   -         
+    0 100039 kernel              linuxkpi_short_wq_0  -1   76 sleep   -         
+    0 100040 kernel              linuxkpi_short_wq_1  -1   76 sleep   -         
+    0 100041 kernel              linuxkpi_short_wq_2  -1   76 sleep   -         
+    0 100042 kernel              linuxkpi_short_wq_3  -1   76 sleep   -         
+    0 100043 kernel              linuxkpi_short_wq_4  -1   76 sleep   -         
+    0 100044 kernel              linuxkpi_short_wq_5  -1   76 sleep   -         
+    0 100045 kernel              linuxkpi_short_wq_6  -1   76 sleep   -         
+    0 100046 kernel              linuxkpi_short_wq_7  -1   76 sleep   -         
+    0 100047 kernel              linuxkpi_short_wq_8  -1   76 sleep   -         
+    0 100048 kernel              linuxkpi_long_wq_0   -1   76 sleep   -         
+    0 100049 kernel              linuxkpi_long_wq_1   -1   76 sleep   -         
+    0 100050 kernel              linuxkpi_long_wq_2   -1   76 sleep   -         
+    0 100051 kernel              linuxkpi_long_wq_3   -1   76 sleep   -         
+    0 100052 kernel              linuxkpi_long_wq_4   -1   76 sleep   -         
+    0 100053 kernel              linuxkpi_long_wq_5   -1   76 sleep   -         
+    0 100054 kernel              linuxkpi_long_wq_6   -1   76 sleep   -         
+    0 100055 kernel              linuxkpi_long_wq_7   -1   76 sleep   -         
+    0 100056 kernel              linuxkpi_long_wq_8   -1   76 sleep   -         
+    0 100857 kernel              drm_dp_mst_wq        -1   76 sleep   -         
+# procstat -at | grep work
+    0 101551 kernel              my_workqueue_0       -1   76 sleep   -         
+    0 101552 kernel              my_workqueue_1       -1   76 sleep   -         
+    0 101553 kernel              my_workqueue_2       -1   76 sleep   -         
+    0 101554 kernel              my_workqueue_3       -1   76 sleep   -         
+    0 101555 kernel              my_workqueue_4       -1   76 sleep   -         
+    0 101556 kernel              my_workqueue_5       -1   76 sleep   -         
+    0 101557 kernel              my_workqueue_6       -1   76 sleep   -         
+    0 101558 kernel              my_workqueue_7       -1   76 sleep   -         
+    0 101559 kernel              my_workqueue_8       -1   76 sleep   -         
+ 1673 101021 at-spi-bus-launcher dconf worker         -1  120 sleep   select    
+ 1693 101083 gvfs-udisks2-volume dconf worker         -1  100 sleep   select    
+ 1709 101340 firefox             dconf worker         -1  136 sleep   select    
+ 1743 101191 mousepad            dconf worker         -1   89 sleep   select 
+
+
+# dmesg -c
+Module unloaded
+# 
+# 
+# procstat -at | grep work
+ 1673 101021 at-spi-bus-launcher dconf worker         -1  120 sleep   select    
+ 1693 101083 gvfs-udisks2-volume dconf worker         -1  100 sleep   select    
+ 1709 101340 firefox             dconf worker         -1  136 sleep   select    
+ 1743 101191 mousepad            dconf worker         -1   88 sleep   select    
+ 1819 101532 gvfsd-network       -                    -1   88 sleep   select    
+ 1819 101572 gvfsd-network       pool-spawner         -1   88 sleep   uwait     
+ 1819 101573 gvfsd-network       gmain                -1   89 sleep   select    
+ 1819 101574 gvfsd-network       gdbus                -1   88 sleep   select    
+ 1819 101577 gvfsd-network       dconf worker         -1   89 sleep   select    
+# 
+# procstat -at | grep wq
+    0 100038 kernel              linuxkpi_irq_wq      -1   76 sleep   -         
+    0 100039 kernel              linuxkpi_short_wq_0  -1   76 sleep   -         
+    0 100040 kernel              linuxkpi_short_wq_1  -1   76 sleep   -         
+    0 100041 kernel              linuxkpi_short_wq_2  -1   76 sleep   -         
+    0 100042 kernel              linuxkpi_short_wq_3  -1   76 sleep   -         
+    0 100043 kernel              linuxkpi_short_wq_4  -1   76 sleep   -         
+    0 100044 kernel              linuxkpi_short_wq_5  -1   76 sleep   -         
+    0 100045 kernel              linuxkpi_short_wq_6  -1   76 sleep   -         
+    0 100046 kernel              linuxkpi_short_wq_7  -1   76 sleep   -         
+    0 100047 kernel              linuxkpi_short_wq_8  -1   76 sleep   -         
+    0 100048 kernel              linuxkpi_long_wq_0   -1   76 sleep   -         
+    0 100049 kernel              linuxkpi_long_wq_1   -1   76 sleep   -         
+    0 100050 kernel              linuxkpi_long_wq_2   -1   76 sleep   -         
+    0 100051 kernel              linuxkpi_long_wq_3   -1   76 sleep   -         
+    0 100052 kernel              linuxkpi_long_wq_4   -1   76 sleep   -         
+    0 100053 kernel              linuxkpi_long_wq_5   -1   76 sleep   -         
+    0 100054 kernel              linuxkpi_long_wq_6   -1   76 sleep   -         
+    0 100055 kernel              linuxkpi_long_wq_7   -1   76 sleep   -         
+    0 100056 kernel              linuxkpi_long_wq_8   -1   76 sleep   -         
+    0 100857 kernel              drm_dp_mst_wq        -1   76 sleep   - 

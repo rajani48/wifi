@@ -1,0 +1,58 @@
+# dmesg -c
+Module loaded
+# procstat -at | grep wq
+    0 100038 kernel              linuxkpi_irq_wq      -1   76 sleep   -         
+    0 100039 kernel              linuxkpi_short_wq_0  -1   76 sleep   -         
+    0 100040 kernel              linuxkpi_short_wq_1  -1   76 sleep   -         
+    0 100041 kernel              linuxkpi_short_wq_2  -1   76 sleep   -         
+    0 100042 kernel              linuxkpi_short_wq_3  -1   76 sleep   -         
+    0 100043 kernel              linuxkpi_short_wq_4  -1   76 sleep   -         
+    0 100044 kernel              linuxkpi_short_wq_5  -1   76 sleep   -         
+    0 100045 kernel              linuxkpi_short_wq_6  -1   76 sleep   -         
+    0 100046 kernel              linuxkpi_short_wq_7  -1   76 sleep   -         
+    0 100047 kernel              linuxkpi_short_wq_8  -1   76 sleep   -         
+    0 100048 kernel              linuxkpi_long_wq_0   -1   76 sleep   -         
+    0 100049 kernel              linuxkpi_long_wq_1   -1   76 sleep   -         
+    0 100050 kernel              linuxkpi_long_wq_2   -1   76 sleep   -         
+    0 100051 kernel              linuxkpi_long_wq_3   -1   76 sleep   -         
+    0 100052 kernel              linuxkpi_long_wq_4   -1   76 sleep   -         
+    0 100053 kernel              linuxkpi_long_wq_5   -1   76 sleep   -         
+    0 100054 kernel              linuxkpi_long_wq_6   -1   76 sleep   -         
+    0 100055 kernel              linuxkpi_long_wq_7   -1   76 sleep   -         
+    0 100056 kernel              linuxkpi_long_wq_8   -1   76 sleep   -         
+    0 100851 kernel              drm_dp_mst_wq        -1   76 sleep   -         
+# procstat -at | grep work
+    0 101599 kernel              my_dworkqueue_0      -1   76 sleep   -         
+    0 101600 kernel              my_dworkqueue_1      -1   76 sleep   -         
+    0 101601 kernel              my_dworkqueue_2      -1   76 sleep   -         
+    0 101602 kernel              my_dworkqueue_3      -1   76 sleep   -         
+    0 101603 kernel              my_dworkqueue_4      -1   76 sleep   -         
+    0 101604 kernel              my_dworkqueue_5      -1   76 sleep   -         
+    0 101605 kernel              my_dworkqueue_6      -1   76 sleep   -         
+    0 101606 kernel              my_dworkqueue_7      -1   76 sleep   -         
+ 1553 100967 at-spi-bus-launcher dconf worker         -1  108 sleep   select    
+ 1573 101032 gvfs-udisks2-volume dconf worker         -1   96 sleep   select    
+ 1581 101279 firefox             dconf worker         -1  110 sleep   select    
+ 1623 101139 mousepad            dconf worker         -1  110 sleep   select    
+# 
+# dmesg -c
+
+# dmesg -c
+Executing delayed deferred work function
+# 
+# procstat -at | grep work
+    0 101599 kernel              my_dworkqueue_0      -1   76 sleep   -         
+    0 101600 kernel              my_dworkqueue_1      -1   76 sleep   -         
+    0 101601 kernel              my_dworkqueue_2      -1   76 sleep   -         
+    0 101602 kernel              my_dworkqueue_3      -1   76 sleep   -         
+    0 101603 kernel              my_dworkqueue_4      -1   76 sleep   -         
+    0 101604 kernel              my_dworkqueue_5      -1   76 sleep   -         
+    0 101605 kernel              my_dworkqueue_6      -1   76 sleep   -         
+    0 101606 kernel              my_dworkqueue_7      -1   76 sleep   -         
+ 1553 100967 at-spi-bus-launcher dconf worker         -1  108 sleep   select    
+ 1573 101032 gvfs-udisks2-volume dconf worker         -1   96 sleep   select    
+ 1581 101279 firefox             dconf worker         -1  110 sleep   select    
+ 1623 101139 mousepad            dconf worker         -1  110 sleep   select    
+# 
+# dmesg -c
+Module unloaded

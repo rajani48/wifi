@@ -1,0 +1,17 @@
+# dmesg -c
+Module loaded, tasklet scheduled
+Executing deferred tasklet
+# 
+# procstat -at | grep softirq
+    0 100011 kernel              softirq_0            -1    8 sleep   -         
+    0 100012 kernel              softirq_1            -1    8 sleep   -         
+    0 100013 kernel              softirq_2            -1    8 sleep   -         
+    0 100014 kernel              softirq_3            -1    8 sleep   -         
+    0 100015 kernel              softirq_4            -1    8 sleep   -         
+    0 100016 kernel              softirq_5            -1    8 sleep   -         
+    0 100017 kernel              softirq_6            -1    8 sleep   -         
+    0 100018 kernel              softirq_7            -1    8 sleep   -         
+# 
+# 
+# dmesg -c
+Module unloaded, tasklet killed

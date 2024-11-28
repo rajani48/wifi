@@ -1,0 +1,96 @@
+﻿# dmesg -c
+Loading example taskqueue module
+Task executed with data: 10 and pending count: 1
+# 
+# procstat -at | grep taskq
+    0 100028 kernel              pci_hp taskq         -1   76 sleep   -         
+    0 100029 kernel              kqueue_ctx taskq     -1   76 sleep   -         
+    0 100032 kernel              thread taskq         -1   76 sleep   -         
+    0 100034 kernel              aiod_kick taskq      -1   76 sleep   -         
+    0 100036 kernel              inm_free taskq       -1   76 sleep   -         
+    0 100037 kernel              in6m_free taskq      -1   76 sleep   -         
+    0 100074 kernel              firmware taskq       -1   76 sleep   -         
+    0 100111 kernel              iwm_taskq            -1    0 sleep   -         
+    0 100116 kernel              system_taskq_0       -1   60 sleep   -         
+    0 100117 kernel              system_taskq_1       -1   60 sleep   -         
+    0 100118 kernel              system_taskq_2       -1   60 sleep   -         
+    0 100119 kernel              system_taskq_3       -1   60 sleep   -         
+    0 100120 kernel              system_taskq_4       -1   60 sleep   -         
+    0 100121 kernel              system_taskq_5       -1   60 sleep   -         
+    0 100122 kernel              system_taskq_6       -1   60 sleep   -         
+    0 100123 kernel              system_taskq_7       -1   60 sleep   -         
+    0 100124 kernel              system_delay_taskq_  -1   60 sleep   -         
+    0 100125 kernel              system_delay_taskq_  -1   60 sleep   -         
+    0 100126 kernel              system_delay_taskq_  -1   60 sleep   -         
+    0 100127 kernel              system_delay_taskq_  -1   60 sleep   -         
+    0 100128 kernel              system_delay_taskq_  -1   60 sleep   -         
+    0 100129 kernel              system_delay_taskq_  -1   60 sleep   -         
+    0 100130 kernel              system_delay_taskq_  -1   60 sleep   -         
+    0 100131 kernel              system_delay_taskq_  -1   60 sleep   -         
+    0 100162 kernel              mca taskq            -1    8 sleep   -         
+    0 100163 kernel              CAM taskq            -1   60 sleep   -         
+    0 100165 kernel              iwm0 net80211 taskq  -1    4 sleep   -         
+    0 101492 kernel              my_taskqueue_thread  -1    4 sleep   -         
+    6 100255 zfskern             dp_sync_taskq_0      -1   60 sleep   -         
+    6 100256 zfskern             dp_sync_taskq_1      -1   60 sleep   -         
+    6 100257 zfskern             dp_sync_taskq_2      -1   60 sleep   -         
+    6 100258 zfskern             dp_sync_taskq_3      -1   60 sleep   -         
+    6 100259 zfskern             dp_sync_taskq_4      -1   60 sleep   -         
+    6 100260 zfskern             dp_sync_taskq_5      -1   60 sleep   -         
+    6 100261 zfskern             dp_zil_clean_taskq_  -1   60 sleep   -         
+    6 100262 zfskern             dp_zil_clean_taskq_  -1   60 sleep   -         
+    6 100263 zfskern             dp_zil_clean_taskq_  -1   60 sleep   -         
+    6 100264 zfskern             dp_zil_clean_taskq_  -1   60 sleep   -         
+    6 100265 zfskern             dp_zil_clean_taskq_  -1   60 sleep   -         
+    6 100266 zfskern             dp_zil_clean_taskq_  -1   60 sleep   -         
+    6 100267 zfskern             dp_zil_clean_taskq_  -1   60 sleep   -         
+    6 100268 zfskern             dp_zil_clean_taskq_  -1   60 sleep   -         
+   12 100031 intr                swi6: Giant taskq    -1    8 wait    -         
+   12 100033 intr                swi5: fast taskq     -1    8 wait    -         
+# 
+# dmesg -c
+Unloading example taskqueue module
+# procstat -at | grep taskq
+    0 100028 kernel              pci_hp taskq         -1   76 sleep   -         
+    0 100029 kernel              kqueue_ctx taskq     -1   76 sleep   -         
+    0 100032 kernel              thread taskq         -1   76 sleep   -         
+    0 100034 kernel              aiod_kick taskq      -1   76 sleep   -         
+    0 100036 kernel              inm_free taskq       -1   76 sleep   -         
+    0 100037 kernel              in6m_free taskq      -1   76 sleep   -         
+    0 100074 kernel              firmware taskq       -1   76 sleep   -         
+    0 100111 kernel              iwm_taskq            -1    0 sleep   -         
+    0 100116 kernel              system_taskq_0       -1   60 sleep   -         
+    0 100117 kernel              system_taskq_1       -1   60 sleep   -         
+    0 100118 kernel              system_taskq_2       -1   60 sleep   -         
+    0 100119 kernel              system_taskq_3       -1   60 sleep   -         
+    0 100120 kernel              system_taskq_4       -1   60 sleep   -         
+    0 100121 kernel              system_taskq_5       -1   60 sleep   -         
+    0 100122 kernel              system_taskq_6       -1   60 sleep   -         
+    0 100123 kernel              system_taskq_7       -1   60 sleep   -         
+    0 100124 kernel              system_delay_taskq_  -1   60 sleep   -         
+    0 100125 kernel              system_delay_taskq_  -1   60 sleep   -         
+    0 100126 kernel              system_delay_taskq_  -1   60 sleep   -         
+    0 100127 kernel              system_delay_taskq_  -1   60 sleep   -         
+    0 100128 kernel              system_delay_taskq_  -1   60 sleep   -         
+    0 100129 kernel              system_delay_taskq_  -1   60 sleep   -         
+    0 100130 kernel              system_delay_taskq_  -1   60 sleep   -         
+    0 100131 kernel              system_delay_taskq_  -1   60 sleep   -         
+    0 100162 kernel              mca taskq            -1    8 sleep   -         
+    0 100163 kernel              CAM taskq            -1   60 sleep   -         
+    0 100165 kernel              iwm0 net80211 taskq  -1    4 sleep   -         
+    6 100255 zfskern             dp_sync_taskq_0      -1   60 sleep   -         
+    6 100256 zfskern             dp_sync_taskq_1      -1   60 sleep   -         
+    6 100257 zfskern             dp_sync_taskq_2      -1   60 sleep   -         
+    6 100258 zfskern             dp_sync_taskq_3      -1   60 sleep   -         
+    6 100259 zfskern             dp_sync_taskq_4      -1   60 sleep   -         
+    6 100260 zfskern             dp_sync_taskq_5      -1   60 sleep   -         
+    6 100261 zfskern             dp_zil_clean_taskq_  -1   60 sleep   -         
+    6 100262 zfskern             dp_zil_clean_taskq_  -1   60 sleep   -         
+    6 100263 zfskern             dp_zil_clean_taskq_  -1   60 sleep   -         
+    6 100264 zfskern             dp_zil_clean_taskq_  -1   60 sleep   -         
+    6 100265 zfskern             dp_zil_clean_taskq_  -1   60 sleep   -         
+    6 100266 zfskern             dp_zil_clean_taskq_  -1   60 sleep   -         
+    6 100267 zfskern             dp_zil_clean_taskq_  -1   60 sleep   -         
+    6 100268 zfskern             dp_zil_clean_taskq_  -1   60 sleep   -         
+   12 100031 intr                swi6: Giant taskq    -1    8 wait    -         
+   12 100033 intr                swi5: fast taskq     -1    8 wait    - 

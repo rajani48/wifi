@@ -1,0 +1,15 @@
+# dmesg -c
+Loading Grouptask sample module
+Group task executed
+# 
+# procstat -at | grep my_taskq
+    0 104711 kernel              my_taskqgroup_0      -1    8 sleep   -         
+# 
+# 
+# dmesg -c
+Unloading Grouptask sample module
+# 
+# procstat -at | grep my_taskq
+    0 104711 kernel              my_taskqgroup_0      -1    8 sleep   -         
+# procstat -at | grep my_taskq
+    0 104711 kernel              my_taskqgroup_0      -1    8 sleep   - 

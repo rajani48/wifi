@@ -1,0 +1,91 @@
+==== bsdmbuf loaded ====
+module loaded!!
+Entry ln_tx_path:66
+===========================
+skb=0xfffff8011bfd7000 skb->len=0
+Headroom : 0
+Tailroom : 256
+===========================
+
+==== After skb_reserve ====
+skb=0xfffff8011bfd7000 skb->len=0
+Headroom : 128
+Tailroom : 128
+============================
+
+==== After skb_put ====
+skb=0xfffff8011bfd7000 skb->len=11
+Headroom : 128
+Tailroom : 117
+skb->data=0xfffff8011bfd7180 skb->data=Hello world
+48 65 6c 6c 6f 20 77 6f 72 6c 64 
+============================
+
+==== After skb_push TCP hdr ====
+skb=0xfffff8011bfd7000 skb->len=31
+Headroom : 108
+Tailroom : 117
+skb->data=0xfffff8011bfd716c 
+54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 48 65 6c 6c 6f 20 77 6f 72 6c 64 
+============================
+
+==== After skb_push IP hdr ====
+skb=0xfffff8011bfd7000 skb->len=51
+Headroom : 88
+Tailroom : 117
+skb->data=0xfffff8011bfd7158 
+49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 48 65 6c 6c 6f 20 77 6f 72 6c 64 
+============================
+
+==== After skb_push ETH hdr ====
+skb=0xfffff8011bfd7000 skb->len=65
+Headroom : 74
+Tailroom : 117
+skb->data=0xfffff8011bfd714a 
+45 45 45 45 45 45 45 45 45 45 45 45 45 45 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 48 65 6c 6c 6f 20 77 6f 72 6c 64 
+============================
+
+==== After skb_put FCS ====
+skb=0xfffff8011bfd7000 skb->len=69
+Headroom : 74
+Tailroom : 113
+skb->data=0xfffff8011bfd714a 
+45 45 45 45 45 45 45 45 45 45 45 45 45 45 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 48 65 6c 6c 6f 20 77 6f 72 6c 64 66 63 73 00 
+============================
+Exit ln_tx_path:136 skb=0xfffff8011bfd7000
+Entry ln_rx_path:143
+ln_rx_path: ===== SKB Data len=69 =====
+45 45 45 45 45 45 45 45 45 45 45 45 45 45 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 48 65 6c 6c 6f 20 77 6f 72 6c 64 66 63 73 00 ln_rx_path: ===== SKB fcs=fcs =====
+
+==== After skb_trim FCS ====
+skb=0xfffff8011bfd7000 skb->len=65
+Headroom : 74
+Tailroom : 117
+skb->data=0xfffff8011bfd714a 
+45 45 45 45 45 45 45 45 45 45 45 45 45 45 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 48 65 6c 6c 6f 20 77 6f 72 6c 64 
+============================
+
+==== After skb_pull ETH hdr ====
+skb=0xfffff8011bfd7000 skb->len=51
+Headroom : 88
+Tailroom : 117
+skb->data=0xfffff8011bfd7158 
+49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 48 65 6c 6c 6f 20 77 6f 72 6c 64 
+============================
+
+==== After skb_pull IP hdr ====
+skb=0xfffff8011bfd7000 skb->len=31
+Headroom : 108
+Tailroom : 117
+skb->data=0xfffff8011bfd716c 
+54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 48 65 6c 6c 6f 20 77 6f 72 6c 64 
+============================
+
+==== After skb_pull TCP hdr ====
+skb=0xfffff8011bfd7000 skb->len=11
+Headroom : 128
+Tailroom : 117
+skb->data=0xfffff8011bfd7180 
+48 65 6c 6c 6f 20 77 6f 72 6c 64 
+============================
+Exit ln_rx_path:191

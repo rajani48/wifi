@@ -1,0 +1,240 @@
+# kldload ./bsd_tx_rx.ko
+# 
+# 
+# dmesg -c
+bsd_mbuf module loaded
+Entry bsd_txpath:48
+
+======= Allocate mbuf =======
+mbuf: 0xfffff8005eace800
+mbuf data: 0xfffff8005eace820
+mbuf length: 0
+mbuf next: 0
+data:
+
+Total length of data in mbuf chain: 0
+===========================
+
+======= Copy Data =======
+mbuf: 0xfffff8005eace800
+mbuf data: 0xfffff8005eace8f0
+mbuf length: 11
+mbuf next: 0
+data:
+48 65 6c 6c 6f 20 57 6f 72 6c 64 
+Total length of data in mbuf chain: 11
+===========================
+
+======= prepend TCP Header =======
+mbuf: 0xfffff8000afda000
+mbuf data: 0xfffff8000afda0e8
+mbuf length: 20
+mbuf next: 0xfffff8005eace800
+data:
+54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 
+54 54 54 54 
+mbuf: 0xfffff8005eace800
+mbuf data: 0xfffff8005eace8f0
+mbuf length: 11
+mbuf next: 0
+data:
+48 65 6c 6c 6f 20 57 6f 72 6c 64 
+Total length of data in mbuf chain: 31
+===========================
+
+======= prepend IP Header =======
+mbuf: 0xfffff8003805c100
+mbuf data: 0xfffff8003805c1e8
+mbuf length: 20
+mbuf next: 0xfffff8000afda000
+data:
+49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 
+49 49 49 49 
+mbuf: 0xfffff8000afda000
+mbuf data: 0xfffff8000afda0e8
+mbuf length: 20
+mbuf next: 0xfffff8005eace800
+data:
+54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 
+54 54 54 54 
+mbuf: 0xfffff8005eace800
+mbuf data: 0xfffff8005eace8f0
+mbuf length: 11
+mbuf next: 0
+data:
+48 65 6c 6c 6f 20 57 6f 72 6c 64 
+Total length of data in mbuf chain: 51
+===========================
+
+======= prepend ETH Header =======
+mbuf: 0xfffff802521bd800
+mbuf data: 0xfffff802521bd8f0
+mbuf length: 14
+mbuf next: 0xfffff8003805c100
+data:
+45 45 45 45 45 45 45 45 45 45 45 45 45 45 
+mbuf: 0xfffff8003805c100
+mbuf data: 0xfffff8003805c1e8
+mbuf length: 20
+mbuf next: 0xfffff8000afda000
+data:
+49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 
+49 49 49 49 
+mbuf: 0xfffff8000afda000
+mbuf data: 0xfffff8000afda0e8
+mbuf length: 20
+mbuf next: 0xfffff8005eace800
+data:
+54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 
+54 54 54 54 
+mbuf: 0xfffff8005eace800
+mbuf data: 0xfffff8005eace8f0
+mbuf length: 11
+mbuf next: 0
+data:
+48 65 6c 6c 6f 20 57 6f 72 6c 64 
+Total length of data in mbuf chain: 65
+===========================
+
+======= append FCS =======
+mbuf: 0xfffff802521bd800
+mbuf data: 0xfffff802521bd8f0
+mbuf length: 14
+mbuf next: 0xfffff8003805c100
+data:
+45 45 45 45 45 45 45 45 45 45 45 45 45 45 
+mbuf: 0xfffff8003805c100
+mbuf data: 0xfffff8003805c1e8
+mbuf length: 20
+mbuf next: 0xfffff8000afda000
+data:
+49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 
+49 49 49 49 
+mbuf: 0xfffff8000afda000
+mbuf data: 0xfffff8000afda0e8
+mbuf length: 20
+mbuf next: 0xfffff8005eace800
+data:
+54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 
+54 54 54 54 
+mbuf: 0xfffff8005eace800
+mbuf data: 0xfffff8005eace8f0
+mbuf length: 15
+mbuf next: 0
+data:
+48 65 6c 6c 6f 20 57 6f 72 6c 64 66 63 73 00 
+Total length of data in mbuf chain: 69
+===========================
+Entry bsd_rxpath: 153
+
+=========== Rx mbuf ==============
+mbuf: 0xfffff802521bd800
+mbuf data: 0xfffff802521bd8f0
+mbuf length: 14
+mbuf next: 0xfffff8003805c100
+data:
+45 45 45 45 45 45 45 45 45 45 45 45 45 45 
+mbuf: 0xfffff8003805c100
+mbuf data: 0xfffff8003805c1e8
+mbuf length: 20
+mbuf next: 0xfffff8000afda000
+data:
+49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 
+49 49 49 49 
+mbuf: 0xfffff8000afda000
+mbuf data: 0xfffff8000afda0e8
+mbuf length: 20
+mbuf next: 0xfffff8005eace800
+data:
+54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 
+54 54 54 54 
+mbuf: 0xfffff8005eace800
+mbuf data: 0xfffff8005eace8f0
+mbuf length: 15
+mbuf next: 0
+data:
+48 65 6c 6c 6f 20 57 6f 72 6c 64 66 63 73 00 
+Total length of data in mbuf chain: 69
+===========================
+last_ch=0xfffff8005eace800
+
+======= FCS Remove =========
+mbuf: 0xfffff802521bd800
+mbuf data: 0xfffff802521bd8f0
+mbuf length: 14
+mbuf next: 0xfffff8003805c100
+data:
+45 45 45 45 45 45 45 45 45 45 45 45 45 45 
+mbuf: 0xfffff8003805c100
+mbuf data: 0xfffff8003805c1e8
+mbuf length: 20
+mbuf next: 0xfffff8000afda000
+data:
+49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 
+49 49 49 49 
+mbuf: 0xfffff8000afda000
+mbuf data: 0xfffff8000afda0e8
+mbuf length: 20
+mbuf next: 0xfffff8005eace800
+data:
+54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 
+54 54 54 54 
+mbuf: 0xfffff8005eace800
+mbuf data: 0xfffff8005eace8f0
+mbuf length: 11
+mbuf next: 0
+data:
+48 65 6c 6c 6f 20 57 6f 72 6c 64 
+Total length of data in mbuf chain: 65
+===========================
+
+======= ETH Hdr Remove =========
+mbuf: 0xfffff8003805c100
+mbuf data: 0xfffff8003805c1e8
+mbuf length: 20
+mbuf next: 0xfffff8000afda000
+data:
+49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 49 
+49 49 49 49 
+mbuf: 0xfffff8000afda000
+mbuf data: 0xfffff8000afda0e8
+mbuf length: 20
+mbuf next: 0xfffff8005eace800
+data:
+54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 
+54 54 54 54 
+mbuf: 0xfffff8005eace800
+mbuf data: 0xfffff8005eace8f0
+mbuf length: 11
+mbuf next: 0
+data:
+48 65 6c 6c 6f 20 57 6f 72 6c 64 
+Total length of data in mbuf chain: 51
+===========================
+
+======= IP Hdr Remove =========
+mbuf: 0xfffff8000afda000
+mbuf data: 0xfffff8000afda0e8
+mbuf length: 20
+mbuf next: 0xfffff8005eace800
+data:
+54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 54 
+54 54 54 54 
+mbuf: 0xfffff8005eace800
+mbuf data: 0xfffff8005eace8f0
+mbuf length: 11
+mbuf next: 0
+data:
+48 65 6c 6c 6f 20 57 6f 72 6c 64 
+Total length of data in mbuf chain: 31
+===========================
+
+======= TCP Hdr Remove =========
+mbuf: 0xfffff8005eace800
+mbuf data: 0xfffff8005eace8f0
+mbuf length: 11
+mbuf next: 0
+data:
+48 65 6c 6c 6f 20 57 6f 72 6c 64 
+Total length of data in mbuf chain: 11
+===========================
