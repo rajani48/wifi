@@ -1,0 +1,40 @@
+#dmesg -c
+Loading example taskqueue module
+Task executed with data: 10 and pending count: 1
+# procstat -at | grep taskq
+    0 100016 kernel              pci_hp taskq         -1   76 sleep   -         
+    0 100017 kernel              kqueue_ctx taskq     -1   76 sleep   -         
+    0 100020 kernel              thread taskq         -1   76 sleep   -         
+    0 100022 kernel              aiod_kick taskq      -1   76 sleep   -         
+    0 100024 kernel              inm_free taskq       -1   76 sleep   -         
+    0 100025 kernel              in6m_free taskq      -1   76 sleep   -         
+    0 100042 kernel              firmware taskq       -1   76 sleep   -         
+    0 100079 kernel              system_taskq_0       -1   60 sleep   -         
+    0 100080 kernel              system_taskq_1       -1   60 sleep   -         
+    0 100081 kernel              system_taskq_2       -1   60 sleep   -         
+    0 100082 kernel              system_taskq_3       -1   60 sleep   -         
+    0 100083 kernel              system_delay_taskq_  -1   60 sleep   -         
+    0 100084 kernel              system_delay_taskq_  -1   60 sleep   -         
+    0 100085 kernel              system_delay_taskq_  -1   60 sleep   -         
+    0 100086 kernel              system_delay_taskq_  -1   60 sleep   -         
+    0 100116 kernel              mca taskq            -1    8 sleep   -         
+    0 100117 kernel              CAM taskq            -1   60 sleep   -         
+    0 101060 kernel              iwn0 net80211 taskq  -1    4 sleep   -         
+    0 101061 kernel              iwn_taskq            -1    0 sleep   -         
+    0 102334 kernel              my_taskqueue_thread  -1    4 sleep   -         
+    6 100183 zfskern             dp_sync_taskq_0      -1   60 sleep   -         
+    6 100184 zfskern             dp_sync_taskq_1      -1   60 sleep   -         
+    6 100185 zfskern             dp_sync_taskq_2      -1   60 sleep   -         
+    6 100186 zfskern             dp_zil_clean_taskq_  -1   60 sleep   -         
+    6 100187 zfskern             dp_zil_clean_taskq_  -1   60 sleep   -         
+    6 100188 zfskern             dp_zil_clean_taskq_  -1   60 sleep   -         
+    6 100189 zfskern             dp_zil_clean_taskq_  -1   60 sleep   -         
+   12 100019 intr                swi6: Giant taskq    -1    8 wait    -         
+   12 100021 intr                swi5: fast taskq     -1    8 wait    - 
+# ./a.out 
+Device opened
+i=0  sample_module_init is activating timer : taskqueue=my_tq, my_task=&my_task
+
+
+
+Device closed
