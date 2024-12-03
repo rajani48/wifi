@@ -11,6 +11,7 @@
 #include <sys/malloc.h>
 #include <sys/mutex.h>
 #include <sys/taskqueue.h>
+#include <sys/callout.h>
 
 #include "chdev_drv.h"
 
@@ -20,6 +21,13 @@
 #include <linux/jiffies.h>
 #include <linux/delay.h>
 #include <linux/workqueue.h>
+
+#define callout_reset_dbg(my_callout, hz, cb, arg) {    \
+        char buf[128];                                  \
+        snprintf(buf, 128, "%s is activating timer", __func__); \
+        wifi_dbg(buf, "callout=" #my_callout ", ticks=" #hz ", cb=" #cb ", arg=" #arg); \
+        callout_reset(my_callout, hz, cb, arg);         \
+}
 
 #define schedule_delayed_work_dbg(my_delaywork, expire) {	\
 	char buf[128];					\
