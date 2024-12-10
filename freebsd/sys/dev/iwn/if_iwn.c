@@ -381,6 +381,7 @@ MODULE_VERSION(iwn, 1);
 MODULE_DEPEND(iwn, firmware, 1, 1, 1);
 MODULE_DEPEND(iwn, pci, 1, 1, 1);
 MODULE_DEPEND(iwn, wlan, 1, 1, 1);
+MODULE_DEPEND(iwn, chdbg, 1, 1, 1);
 
 static d_ioctl_t iwn_cdev_ioctl;
 static d_open_t iwn_cdev_open;
@@ -2991,7 +2992,7 @@ iwn_calib_timeout(void *arg)
 		    sizeof flags, 1);
 		sc->calib_cnt = 0;
 	}
-	callout_reset(&sc->calib_to, msecs_to_ticks(500), iwn_calib_timeout,
+	callout_reset_dbg(&sc->calib_to, msecs_to_ticks(500), iwn_calib_timeout,
 	    sc);
 }
 
@@ -3173,7 +3174,7 @@ iwn_rx_done(struct iwn_softc *sc, struct iwn_rx_desc *desc,
 			DPRINTF(sc, IWN_DEBUG_TRACE | IWN_DEBUG_XMIT,
 			    "%s: waking things up\n", __func__);
 			/* queue taskqueue to transmit! */
-			taskqueue_enqueue(sc->sc_tq, &sc->sc_xmit_task);
+			taskqueue_enqueue_dbg(sc->sc_tq, &sc->sc_xmit_task);
 		}
 	}
 
@@ -4307,7 +4308,7 @@ iwn_intr(void *arg)
 		IWN_WRITE(sc, IWN_FH_INT, r2);
 
 	if (r1 & IWN_INT_RF_TOGGLED) {
-		taskqueue_enqueue(sc->sc_tq, &sc->sc_rftoggle_task);
+		taskqueue_enqueue_dbg(sc->sc_tq, &sc->sc_rftoggle_task);
 		goto done;
 	}
 	if (r1 & IWN_INT_CT_REACHED) {
@@ -4323,7 +4324,7 @@ iwn_intr(void *arg)
 		/* Dump firmware error log and stop. */
 		iwn_fatal_intr(sc);
 
-		taskqueue_enqueue(sc->sc_tq, &sc->sc_panic_task);
+		taskqueue_enqueue_dbg(sc->sc_tq, &sc->sc_panic_task);
 		goto done;
 	}
 	if ((r1 & (IWN_INT_FH_RX | IWN_INT_SW_RX | IWN_INT_RX_PERIODIC)) ||
@@ -5135,7 +5136,7 @@ iwn_watchdog(void *arg)
 			return;
 		}
 	}
-	callout_reset(&sc->watchdog_to, hz, iwn_watchdog, sc);
+	callout_reset_dbg(&sc->watchdog_to, hz, iwn_watchdog, sc);
 }
 
 static int
@@ -5207,7 +5208,7 @@ iwn_parent(struct ieee80211com *ic)
 			break;
 		case 1:
 			/* radio is disabled via RFkill switch */
-			taskqueue_enqueue(sc->sc_tq, &sc->sc_rftoggle_task);
+			taskqueue_enqueue_dbg(sc->sc_tq, &sc->sc_rftoggle_task);
 			break;
 		default:
 			vap = TAILQ_FIRST(&ic->ic_vaps);
@@ -7259,7 +7260,7 @@ iwn_scan(struct iwn_softc *sc, struct ieee80211vap *vap,
 	error = iwn_cmd(sc, IWN_CMD_SCAN, buf, buflen, 1);
 	free(buf, M_DEVBUF);
 	if (error == 0)
-		callout_reset(&sc->scan_timeout, 5*hz, iwn_scan_timeout, sc);
+		callout_reset_dbg(&sc->scan_timeout, 5*hz, iwn_scan_timeout, sc);
 
 	DPRINTF(sc, IWN_DEBUG_TRACE, "->%s: end\n",__func__);
 
@@ -7433,7 +7434,7 @@ iwn_run(struct iwn_softc *sc, struct ieee80211vap *vap)
 	/* Start periodic calibration timer. */
 	sc->calib.state = IWN_CALIB_STATE_ASSOC;
 	sc->calib_cnt = 0;
-	callout_reset(&sc->calib_to, msecs_to_ticks(500), iwn_calib_timeout,
+	callout_reset_dbg(&sc->calib_to, msecs_to_ticks(500), iwn_calib_timeout,
 	    sc);
 
 	/* Link LED always on while associated. */
@@ -9012,7 +9013,7 @@ iwn_init_locked(struct iwn_softc *sc)
 		goto fail;
 	}
 
-	callout_reset(&sc->watchdog_to, hz, iwn_watchdog, sc);
+	callout_reset_dbg(&sc->watchdog_to, hz, iwn_watchdog, sc);
 
 end:
 	DPRINTF(sc, IWN_DEBUG_TRACE, "->%s: end\n",__func__);

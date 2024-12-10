@@ -22,7 +22,7 @@
 
 #ifndef	__IF_IWN_DEBUG_H__
 #define	__IF_IWN_DEBUG_H__
-
+#include <chdbg/bsd_wifidbg.h>
 #ifdef	IWN_DEBUG
 enum {
 	IWN_DEBUG_XMIT		= 0x00000001,	/* basic xmit operation */

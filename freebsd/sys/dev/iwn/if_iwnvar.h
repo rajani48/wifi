@@ -434,7 +434,7 @@ struct iwn_softc {
 #define IWN_LOCK_INIT(_sc) \
 	mtx_init(&(_sc)->sc_mtx, device_get_nameunit((_sc)->sc_dev), \
 	    MTX_NETWORK_LOCK, MTX_DEF)
-#define IWN_LOCK(_sc)			mtx_lock(&(_sc)->sc_mtx)
+#define IWN_LOCK(_sc)			mtx_lock_dbg(&(_sc)->sc_mtx)
 #define IWN_LOCK_ASSERT(_sc)		mtx_assert(&(_sc)->sc_mtx, MA_OWNED)
-#define IWN_UNLOCK(_sc)			mtx_unlock(&(_sc)->sc_mtx)
+#define IWN_UNLOCK(_sc)			mtx_unlock_dbg(&(_sc)->sc_mtx)
 #define IWN_LOCK_DESTROY(_sc)		mtx_destroy(&(_sc)->sc_mtx)
