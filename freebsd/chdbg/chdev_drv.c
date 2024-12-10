@@ -7,7 +7,7 @@
 #include <sys/sysctl.h>
 #include <sys/systm.h>
 
-#include "chdev_drv.h"
+#include <chdbg/chdev_drv.h>
 
 #define DEVICE_NAME "chdbg"
 //#define DEBUG_LOG_ENABLED 1
