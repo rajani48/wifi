@@ -304,12 +304,12 @@ sysctl_ieee80211coms(SYSCTL_HANDLER_ARGS)
 	sbuf_new_for_sysctl(&sb, NULL, 8, req);
 	sbuf_clear_flags(&sb, SBUF_INCLUDENUL);
 	sp = "";
-	mtx_lock(&ic_list_mtx);
+	mtx_lock_dbg(&ic_list_mtx);
 	LIST_FOREACH(ic, &ic_head, ic_next) {
 		sbuf_printf(&sb, "%s%s", sp, ic->ic_name);
 		sp = " ";
 	}
-	mtx_unlock(&ic_list_mtx);
+	mtx_unlock_dbg(&ic_list_mtx);
 	error = sbuf_finish(&sb);
 	sbuf_delete(&sb);
 	return (error);
@@ -370,9 +370,9 @@ ieee80211_ifattach(struct ieee80211com *ic)
 
 	ieee80211_sysctl_attach(ic);
 
-	mtx_lock(&ic_list_mtx);
+	mtx_lock_dbg(&ic_list_mtx);
 	LIST_INSERT_HEAD(&ic_head, ic, ic_next);
-	mtx_unlock(&ic_list_mtx);
+	mtx_unlock_dbg(&ic_list_mtx);
 }
 
 /*
@@ -395,9 +395,9 @@ ieee80211_ifdetach(struct ieee80211com *ic)
 	if (ic->ic_tq == NULL)
 		return;
 
-	mtx_lock(&ic_list_mtx);
+	mtx_lock_dbg(&ic_list_mtx);
 	LIST_REMOVE(ic, ic_next);
-	mtx_unlock(&ic_list_mtx);
+	mtx_unlock_dbg(&ic_list_mtx);
 
 	taskqueue_drain(taskqueue_thread, &ic->ic_restart_task);
 
@@ -439,11 +439,11 @@ ieee80211_find_com(const char *name)
 {
 	struct ieee80211com *ic;
 
-	mtx_lock(&ic_list_mtx);
+	mtx_lock_dbg(&ic_list_mtx);
 	LIST_FOREACH(ic, &ic_head, ic_next)
 		if (strcmp(ic->ic_name, name) == 0)
 			break;
-	mtx_unlock(&ic_list_mtx);
+	mtx_unlock_dbg(&ic_list_mtx);
 
 	return (ic);
 }
@@ -453,10 +453,10 @@ ieee80211_iterate_coms(ieee80211_com_iter_func *f, void *arg)
 {
 	struct ieee80211com *ic;
 
-	mtx_lock(&ic_list_mtx);
+	mtx_lock_dbg(&ic_list_mtx);
 	LIST_FOREACH(ic, &ic_head, ic_next)
 		(*f)(arg, ic);
-	mtx_unlock(&ic_list_mtx);
+	mtx_unlock_dbg(&ic_list_mtx);
 }
 
 /*

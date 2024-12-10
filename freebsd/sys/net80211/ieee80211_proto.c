@@ -2200,7 +2200,7 @@ ieee80211_restart_all(struct ieee80211com *ic)
 	 * NB: do not use ieee80211_runtask here, we will
 	 * block & drain net80211 taskqueue.
 	 */
-	taskqueue_enqueue(taskqueue_thread, &ic->ic_restart_task);
+	taskqueue_enqueue_dbg(taskqueue_thread, &ic->ic_restart_task);
 }
 
 void

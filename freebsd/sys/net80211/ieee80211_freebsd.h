@@ -67,8 +67,8 @@ typedef struct {
 } while (0)
 #define	IEEE80211_LOCK_OBJ(_ic)	(&(_ic)->ic_comlock.mtx)
 #define	IEEE80211_LOCK_DESTROY(_ic) mtx_destroy(IEEE80211_LOCK_OBJ(_ic))
-#define	IEEE80211_LOCK(_ic)	   mtx_lock(IEEE80211_LOCK_OBJ(_ic))
-#define	IEEE80211_UNLOCK(_ic)	   mtx_unlock(IEEE80211_LOCK_OBJ(_ic))
+#define	IEEE80211_LOCK(_ic)	   mtx_lock_dbg(IEEE80211_LOCK_OBJ(_ic))
+#define	IEEE80211_UNLOCK(_ic)	   mtx_unlock_dbg(IEEE80211_LOCK_OBJ(_ic))
 #define	IEEE80211_LOCK_ASSERT(_ic) \
 	mtx_assert(IEEE80211_LOCK_OBJ(_ic), MA_OWNED)
 #define	IEEE80211_UNLOCK_ASSERT(_ic) \
@@ -91,8 +91,8 @@ typedef struct {
 } while (0)
 #define	IEEE80211_TX_LOCK_OBJ(_ic)	(&(_ic)->ic_txlock.mtx)
 #define	IEEE80211_TX_LOCK_DESTROY(_ic) mtx_destroy(IEEE80211_TX_LOCK_OBJ(_ic))
-#define	IEEE80211_TX_LOCK(_ic)	   mtx_lock(IEEE80211_TX_LOCK_OBJ(_ic))
-#define	IEEE80211_TX_UNLOCK(_ic)	   mtx_unlock(IEEE80211_TX_LOCK_OBJ(_ic))
+#define	IEEE80211_TX_LOCK(_ic)	   mtx_lock_dbg(IEEE80211_TX_LOCK_OBJ(_ic))
+#define	IEEE80211_TX_UNLOCK(_ic)	   mtx_unlock_dbg(IEEE80211_TX_LOCK_OBJ(_ic))
 #define	IEEE80211_TX_LOCK_ASSERT(_ic) \
 	mtx_assert(IEEE80211_TX_LOCK_OBJ(_ic), MA_OWNED)
 #define	IEEE80211_TX_UNLOCK_ASSERT(_ic) \
@@ -112,8 +112,8 @@ typedef struct {
 } while (0)
 #define IEEE80211_FF_LOCK_OBJ(_ic)	(&(_ic)->ic_fflock.mtx)
 #define IEEE80211_FF_LOCK_DESTROY(_ic)	mtx_destroy(IEEE80211_FF_LOCK_OBJ(_ic))
-#define IEEE80211_FF_LOCK(_ic)		mtx_lock(IEEE80211_FF_LOCK_OBJ(_ic))
-#define IEEE80211_FF_UNLOCK(_ic)	mtx_unlock(IEEE80211_FF_LOCK_OBJ(_ic))
+#define IEEE80211_FF_LOCK(_ic)		mtx_lock_dbg(IEEE80211_FF_LOCK_OBJ(_ic))
+#define IEEE80211_FF_UNLOCK(_ic)	mtx_unlock_dbg(IEEE80211_FF_LOCK_OBJ(_ic))
 #define IEEE80211_FF_LOCK_ASSERT(_ic) \
 	mtx_assert(IEEE80211_FF_LOCK_OBJ(_ic), MA_OWNED)
 
@@ -133,11 +133,11 @@ typedef struct {
 #define	IEEE80211_NODE_LOCK_DESTROY(_nt) \
 	mtx_destroy(IEEE80211_NODE_LOCK_OBJ(_nt))
 #define	IEEE80211_NODE_LOCK(_nt) \
-	mtx_lock(IEEE80211_NODE_LOCK_OBJ(_nt))
+	mtx_lock_dbg(IEEE80211_NODE_LOCK_OBJ(_nt))
 #define	IEEE80211_NODE_IS_LOCKED(_nt) \
 	mtx_owned(IEEE80211_NODE_LOCK_OBJ(_nt))
 #define	IEEE80211_NODE_UNLOCK(_nt) \
-	mtx_unlock(IEEE80211_NODE_LOCK_OBJ(_nt))
+	mtx_unlock_dbg(IEEE80211_NODE_LOCK_OBJ(_nt))
 #define	IEEE80211_NODE_LOCK_ASSERT(_nt)	\
 	mtx_assert(IEEE80211_NODE_LOCK_OBJ(_nt), MA_OWNED)
 
@@ -148,8 +148,8 @@ typedef struct mtx ieee80211_psq_lock_t;
 #define	IEEE80211_PSQ_INIT(_psq, _name) \
 	mtx_init(&(_psq)->psq_lock, _name, "802.11 ps q", MTX_DEF)
 #define	IEEE80211_PSQ_DESTROY(_psq)	mtx_destroy(&(_psq)->psq_lock)
-#define	IEEE80211_PSQ_LOCK(_psq)	mtx_lock(&(_psq)->psq_lock)
-#define	IEEE80211_PSQ_UNLOCK(_psq)	mtx_unlock(&(_psq)->psq_lock)
+#define	IEEE80211_PSQ_LOCK(_psq)	mtx_lock_dbg(&(_psq)->psq_lock)
+#define	IEEE80211_PSQ_UNLOCK(_psq)	mtx_unlock_dbg(&(_psq)->psq_lock)
 
 #ifndef IF_PREPEND_LIST
 #define _IF_PREPEND_LIST(ifq, mhead, mtail, mcount) do {	\
@@ -173,8 +173,8 @@ typedef struct mtx ieee80211_ageq_lock_t;
 #define	IEEE80211_AGEQ_INIT(_aq, _name) \
 	mtx_init(&(_aq)->aq_lock, _name, "802.11 age q", MTX_DEF)
 #define	IEEE80211_AGEQ_DESTROY(_aq)	mtx_destroy(&(_aq)->aq_lock)
-#define	IEEE80211_AGEQ_LOCK(_aq)	mtx_lock(&(_aq)->aq_lock)
-#define	IEEE80211_AGEQ_UNLOCK(_aq)	mtx_unlock(&(_aq)->aq_lock)
+#define	IEEE80211_AGEQ_LOCK(_aq)	mtx_lock_dbg(&(_aq)->aq_lock)
+#define	IEEE80211_AGEQ_UNLOCK(_aq)	mtx_unlock_dbg(&(_aq)->aq_lock)
 
 /*
  * 802.1x MAC ACL database locking definitions.
@@ -183,8 +183,8 @@ typedef struct mtx acl_lock_t;
 #define	ACL_LOCK_INIT(_as, _name) \
 	mtx_init(&(_as)->as_lock, _name, "802.11 ACL", MTX_DEF)
 #define	ACL_LOCK_DESTROY(_as)		mtx_destroy(&(_as)->as_lock)
-#define	ACL_LOCK(_as)			mtx_lock(&(_as)->as_lock)
-#define	ACL_UNLOCK(_as)			mtx_unlock(&(_as)->as_lock)
+#define	ACL_LOCK(_as)			mtx_lock_dbg(&(_as)->as_lock)
+#define	ACL_UNLOCK(_as)			mtx_unlock_dbg(&(_as)->as_lock)
 #define	ACL_LOCK_ASSERT(_as) \
 	mtx_assert((&(_as)->as_lock), MA_OWNED)
 
@@ -195,15 +195,15 @@ typedef struct mtx ieee80211_scan_table_lock_t;
 #define	IEEE80211_SCAN_TABLE_LOCK_INIT(_st, _name) \
 	mtx_init(&(_st)->st_lock, _name, "802.11 scan table", MTX_DEF)
 #define	IEEE80211_SCAN_TABLE_LOCK_DESTROY(_st)	mtx_destroy(&(_st)->st_lock)
-#define	IEEE80211_SCAN_TABLE_LOCK(_st)		mtx_lock(&(_st)->st_lock)
-#define	IEEE80211_SCAN_TABLE_UNLOCK(_st)	mtx_unlock(&(_st)->st_lock)
+#define	IEEE80211_SCAN_TABLE_LOCK(_st)		mtx_lock_dbg(&(_st)->st_lock)
+#define	IEEE80211_SCAN_TABLE_UNLOCK(_st)	mtx_unlock_dbg(&(_st)->st_lock)
 
 typedef struct mtx ieee80211_scan_iter_lock_t;
 #define	IEEE80211_SCAN_ITER_LOCK_INIT(_st, _name) \
 	mtx_init(&(_st)->st_scanlock, _name, "802.11 scangen", MTX_DEF)
 #define	IEEE80211_SCAN_ITER_LOCK_DESTROY(_st)	mtx_destroy(&(_st)->st_scanlock)
-#define	IEEE80211_SCAN_ITER_LOCK(_st)		mtx_lock(&(_st)->st_scanlock)
-#define	IEEE80211_SCAN_ITER_UNLOCK(_st)	mtx_unlock(&(_st)->st_scanlock)
+#define	IEEE80211_SCAN_ITER_LOCK(_st)		mtx_lock_dbg(&(_st)->st_scanlock)
+#define	IEEE80211_SCAN_ITER_UNLOCK(_st)	mtx_unlock_dbg(&(_st)->st_scanlock)
 
 /*
  * Mesh node/routing definitions.
@@ -213,14 +213,14 @@ typedef struct mtx ieee80211_rte_lock_t;
 	mtx_init(&(rt)->rt_lock, _name, "802.11s route entry", MTX_DEF)
 #define	MESH_RT_ENTRY_LOCK_DESTROY(_rt) \
 	mtx_destroy(&(_rt)->rt_lock)
-#define	MESH_RT_ENTRY_LOCK(rt)	mtx_lock(&(rt)->rt_lock)
+#define	MESH_RT_ENTRY_LOCK(rt)	mtx_lock_dbg(&(rt)->rt_lock)
 #define	MESH_RT_ENTRY_LOCK_ASSERT(rt) mtx_assert(&(rt)->rt_lock, MA_OWNED)
-#define	MESH_RT_ENTRY_UNLOCK(rt)	mtx_unlock(&(rt)->rt_lock)
+#define	MESH_RT_ENTRY_UNLOCK(rt)	mtx_unlock_dbg(&(rt)->rt_lock)
 
 typedef struct mtx ieee80211_rt_lock_t;
-#define	MESH_RT_LOCK(ms)	mtx_lock(&(ms)->ms_rt_lock)
+#define	MESH_RT_LOCK(ms)	mtx_lock_dbg(&(ms)->ms_rt_lock)
 #define	MESH_RT_LOCK_ASSERT(ms)	mtx_assert(&(ms)->ms_rt_lock, MA_OWNED)
-#define	MESH_RT_UNLOCK(ms)	mtx_unlock(&(ms)->ms_rt_lock)
+#define	MESH_RT_UNLOCK(ms)	mtx_unlock_dbg(&(ms)->ms_rt_lock)
 #define	MESH_RT_LOCK_INIT(ms, name) \
 	mtx_init(&(ms)->ms_rt_lock, name, "802.11s routing table", MTX_DEF)
 #define	MESH_RT_LOCK_DESTROY(ms) \

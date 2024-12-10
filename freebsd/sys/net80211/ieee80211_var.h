@@ -54,6 +54,7 @@
 #include <net80211/ieee80211_proto.h>
 #include <net80211/ieee80211_radiotap.h>
 #include <net80211/ieee80211_scan.h>
+#include <chdbg/bsd_wifidbg.h>
 
 #define	IEEE80211_TXPOWER_MAX	100	/* .5 dBm (XXX units?) */
 #define	IEEE80211_TXPOWER_MIN	0	/* kill radio */
@@ -851,7 +852,7 @@ ieee80211_radiotap_active_vap(const struct ieee80211vap *vap)
 static __inline void
 ieee80211_runtask(struct ieee80211com *ic, struct task *task)
 {
-	taskqueue_enqueue(ic->ic_tq, task);
+	taskqueue_enqueue_dbg(ic->ic_tq, task);
 }
 
 /*
